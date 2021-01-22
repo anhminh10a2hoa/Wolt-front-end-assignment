@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState, Fragment } from 'react';
+import { decode } from "blurhash";
+import { Section } from "./models/Section";
+import restaurants_data from "./data/discovery_page.json";
 import './App.css';
+import { Restaurant } from './models/Restaurant';
 
 function App() {
+  const [data, setData] = useState([] as any[]);
+
+  useEffect(() => {
+    let sections = [];
+    for(const section in restaurants_data.sections){
+      sections.push(restaurants_data.sections[section]);
+    }
+    setData(sections);
+    getImageData();
+    console.log(sections);
+  }, [])
+
+  const getImageData = () => {
+    const pixels = decode("LEHV6nWB2yk8pyo0adR*.7kCMdnj", 32, 32);
+    console.log(pixels);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        data.map((section: Section) => (
+          <Fragment>
+            <h1>{section.title}</h1>
+            {/* {section.restaurants.map((restaurant: Restaurant) => (
+            ))} */}
+          </Fragment>
+        ))
+      }
     </div>
   );
 }
