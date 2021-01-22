@@ -1,4 +1,4 @@
-export interface Restaurant {
+export interface IRestaurant {
   blurhash: string;
   launch_date: Date;
   location: number[];
