@@ -3,10 +3,11 @@ import { Blurhash } from "react-blurhash";
 import { IRestaurant } from '../models/IRestaurant';
 
 type RestaurantProps = {
-  restaurant: IRestaurant
+  restaurant: IRestaurant,
+  index: number
 }
 
-const Restaurant: React.FC<RestaurantProps> = ({restaurant}) => {
+const Restaurant: React.FC<RestaurantProps> = ({restaurant, index}) => {
   return (
     <div className="restaurant">
       <Blurhash
@@ -17,8 +18,8 @@ const Restaurant: React.FC<RestaurantProps> = ({restaurant}) => {
         resolutionY={32}
         punch={1}
       />
-      <p className="status">{restaurant.online ? "Online" : "Offline"}</p>
-      <p className="name">{restaurant.name}</p>
+      <p className="restaurant-status">{restaurant.online ? "Online" : "Offline"}</p>
+      <p className="restaurant-name">{restaurant.name}</p>
     </div>
   );
 }
